@@ -20,6 +20,7 @@ body {
   margin: 0;
   background-color: #f0f8ff;
   line-height: 80px;
+  box-shadow: 5px 5px 5px 0px #a6a6a6;
 }
 
 .board .board-header button.create-column {
@@ -39,12 +40,18 @@ body {
   left: 50%;
   transform: translate(-50%, 0);
   margin: 15px 0;
+  box-shadow: 5px 5px 5px 0px #a6a6a6;
 }
 
 .board .board-header button.create-column:hover {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
+  box-shadow: 1px 1px 0px 0px rgba(49, 65, 53, 0.568);
+}
+
+.board .board-header button.create-column:active {
+  background-color: #28a745;
 }
 
 .board .column-container {
@@ -74,7 +81,7 @@ body {
 .board .column-container > div .column .column-header {
   display: -ms-flexbox;
   display: flex;
-  background-color: #556b7e;
+  background-color: #97ca98;
 }
 
 .board .column-container > div .column .column-header .column-title {
@@ -82,7 +89,7 @@ body {
   margin: 0;
   width: 100%;
   height: 40px;
-  color: #f7f7f9;
+  color: #00310b;
   line-height: 40px;
   text-transform: uppercase;
 }
@@ -117,18 +124,24 @@ body {
 
 .board .column-container > div .column-btns {
   padding-left: 10px;
-  background-color: #556b7e;
+  background-color: #566c5b;
   height: 40px;
   line-height: 40px;
 }
 
 .board .column-container > div .column-btns .add-card {
-  color: #026b1b;
+  color: #00310b;
 }
 
 .board .column-container > div .column-btns .add-card:hover {
   color: #fff;
+  background-color: #6c757d;
+  border: 1px solid #000;
+}
+
+.board .column-container > div .column-btns .add-card:active {
   background-color: #28a745;
+  border: 1px solid #fff;
 }
 
 button.btn-delete {

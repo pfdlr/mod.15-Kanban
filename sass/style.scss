@@ -2,7 +2,9 @@ $body: #ebe8db;
 $board: #fff;
 $hd: #f0f8ff;
 $column: #f7f7f9;
-$column-title: #556b7e;
+$column-title: #97ca98;
+$column-title-tx: #00310b;
+$column-footer: #566c5b;
 $card: #e6e6e6;
 $btn-col: #6c757d;
 * {
@@ -24,6 +26,7 @@ body {
       margin: 0;
       background-color: $hd;
       line-height: 80px;
+      box-shadow: 5px 5px 5px 0px rgba(166, 166, 166, 1);
     }
     button.create-column {
       color: #6c757d;
@@ -38,15 +41,20 @@ body {
       line-height: 1.5;
       border-radius: 0.25rem;
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-        box-shadow 0.15s ease-in-out;
+      box-shadow 0.15s ease-in-out;
       position: relative;
       left: 50%;
       transform: translate(-50%, 0);
       margin: 15px 0;
+      box-shadow: 5px 5px 5px 0px rgba(166, 166, 166, 1);
       &:hover {
         color: $board;
         background-color: $btn-col;
         border-color: $btn-col;
+        box-shadow: 1px 1px 0px 0px rgba(49, 65, 53, 0.568);
+      }
+      &:active {
+        background-color: #28a745;
       }
     }
   }
@@ -75,7 +83,7 @@ body {
           margin: 0;
           width: 100%;
           height: 40px;
-          color: $column;
+          color: $column-title-tx;
           line-height: 40px;
           text-transform: uppercase;
         }
@@ -105,14 +113,19 @@ body {
     }
     .column-btns {
       padding-left: 10px;
-      background-color: $column-title;
+      background-color: $column-footer;
       height: 40px;
       line-height: 40px;
       .add-card {
-        color: #026b1b;
+        color: $column-title-tx;
         &:hover {
-          color: #fff;
+          color: $board;
+          background-color: $btn-col;
+          border: 1px solid #000;
+        }
+        &:active {
           background-color: #28a745;
+          border: 1px solid #fff;
         }
       }
     }
