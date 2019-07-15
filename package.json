@@ -10,8 +10,6 @@
     "init:dirs": "mkdirp sass css vendor images js",
     "init:files": "touch README.md index.html sass/style.scss js/script.js",
     "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
-      
-    
     "build": "npm-run-all test build:*",
     "build:clean": "rimraf docs sass/*.css css/*.map",
     "build:sass": "node-sass --output-style compressed -o css sass",
@@ -19,7 +17,6 @@
     "build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
     "build:image": "imagemin images/* --out-dir=images",
     "build:docs": "bash docs.sh",
-
     "watch": "npm-run-all -p watch:*",
     "watch:browsersync": "browser-sync start --server --files 'css/*.css, *.html'",
     "watch:sassprefixer": "onchange sass/*.scss -- npm-run-all build-dev:sass build:autoprefixer"
@@ -39,6 +36,7 @@
     "rimraf": "^2.6.3"
   },
   "dependencies": {
-    "imagemin-cli": "^4.0.1"
+    "imagemin-cli": "^4.0.1",
+    "lodash": "^4.17.14"
   }
 }
