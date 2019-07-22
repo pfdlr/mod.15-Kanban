@@ -95,7 +95,7 @@ body {
 .board .column-container > div .column .column-card-list {
   padding: 10px 10px;
   margin: 10px;
-  min-height: 300px;
+  min-height: 340px;
   list-style: none;
 }
 
