@@ -9,22 +9,26 @@ var board = {
 
 document.querySelector("#board .create-column").addEventListener("click", function() {
   var name = prompt("Enter a column name");
-  var data = {
-    name: name
-  };
+  if (name === null) {
+    alert("Cancel pressed");
+  } else {
+    var data = {
+      name: name
+    };
 
-  fetch(baseUrl + "/column", {
-    method: "POST",
-    headers: myHeaders,
-    body: JSON.stringify(data)
-  })
-    .then(function(resp) {
-      return resp.json();
+    fetch(baseUrl + "/column", {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(data)
     })
-    .then(function(resp) {
-      var column = new Column(resp.id, name);
-      board.addColumn(column);
-    });
+      .then(function(resp) {
+        return resp.json();
+      })
+      .then(function(resp) {
+        var column = new Column(resp.id, name);
+        board.addColumn(column);
+      });
+  }
 });
 
 function initSortable(id) {
