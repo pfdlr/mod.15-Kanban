@@ -6,24 +6,33 @@ function Card(id, name) {
   this.name = name || "No card name given";
   this.element = generateTemplate("card-template", { description: this.name }, "li");
 
-  this.element.querySelector(".card").addEventListener("click", function(event) {
+  this.element.querySelector(".card").addEventListener("click", function (event) {
     event.stopPropagation();
 
     if (event.target.classList.contains("btn-delete")) {
       self.removeCard();
     }
   });
+  
+
 }
 Card.prototype = {
-  removeCard: function() {
+  removeCard: function () {
     var self = this;
 
     fetch(baseUrl + "/card/" + self.id, { method: "DELETE", headers: myHeaders })
-      .then(function(resp) {
+      .then(function (resp) {
         return resp.json();
       })
-      .then(function(resp) {
+      .then(function (resp) {
         self.element.parentNode.removeChild(self.element);
       });
-  }
+  },
+  renameCard: function (data) {
+    var self = this;
+    fetch(baseUrl + "/card/" + self.id, { method: "PUT", headers: myHeaders, body: JSON.stringify(data) })
+      .then(function (resp) {
+        return resp.json();
+      })
+  },
 };
