@@ -13,8 +13,8 @@ function Column(id, name) {
     if (event.target.classList.contains("add-card")) {
       var cardName = prompt("Enter the name of the card");
       event.preventDefault();
-      if (name === null) {
-        alert("Cancel pressed");
+      if (cardName === null) {
+        return;
       } else {
         var data = {
           name: cardName,
@@ -31,6 +31,9 @@ function Column(id, name) {
           .then(function (resp) {
             var card = new Card(resp.id, cardName);
             self.addCard(card);
+          })
+          .catch(function(error) {
+            console.log(error);
           });
       }
     } //end of addCard
@@ -57,11 +60,7 @@ function Column(id, name) {
       }
     }
   });
-////////////////////////
-
-/////////////////////////
 }
-
 
 Column.prototype = {
   addCard: function (card) {
@@ -75,6 +74,9 @@ Column.prototype = {
       })
       .then(function (resp) {
         self.element.parentNode.removeChild(self.element);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
   },
   renameColumn: function (data) {
@@ -83,5 +85,8 @@ Column.prototype = {
       .then(function (resp) {
         return resp.json();
       })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
 };

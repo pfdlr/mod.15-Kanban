@@ -23,7 +23,10 @@ fetch(prefix + baseUrl + '/board', { headers: myHeaders })
 	})
 	.then(function (resp) {
 		setupColumns(resp.columns);
-	});
+	})
+	.catch(function(error) {
+        console.log(error);
+      });
 //set up colums from API data
 function setupColumns(columns) {
 	columns.forEach(function (column) {

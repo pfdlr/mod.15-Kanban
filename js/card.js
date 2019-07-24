@@ -26,6 +26,9 @@ Card.prototype = {
       })
       .then(function (resp) {
         self.element.parentNode.removeChild(self.element);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
   },
   renameCard: function (data) {
@@ -34,5 +37,8 @@ Card.prototype = {
       .then(function (resp) {
         return resp.json();
       })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
 };

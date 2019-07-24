@@ -10,7 +10,7 @@ var board = {
 document.querySelector("#board .create-column").addEventListener("click", function() {
   var name = prompt("Enter a column name");
   if (name === null) {
-    alert("Cancel pressed");
+    return;
   } else {
     var data = {
       name: name
@@ -27,6 +27,9 @@ document.querySelector("#board .create-column").addEventListener("click", functi
       .then(function(resp) {
         var column = new Column(resp.id, name);
         board.addColumn(column);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
   }
 });
