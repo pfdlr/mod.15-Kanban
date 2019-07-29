@@ -1,13 +1,13 @@
 var board = {
   name: "Tablica Kanban",
-  addColumn: function(column) {
+  addColumn: function (column) {
     this.element.appendChild(column.element);
     initSortable(column.id);
   },
   element: document.querySelector("#board .column-container")
 };
 
-document.querySelector("#board .create-column").addEventListener("click", function() {
+document.querySelector("#board .create-column").addEventListener("click", function () {
   var name = prompt("Enter a column name");
   if (name === null) {
     return;
@@ -21,25 +21,28 @@ document.querySelector("#board .create-column").addEventListener("click", functi
       headers: myHeaders,
       body: JSON.stringify(data)
     })
-      .then(function(resp) {
+      .then(function (resp) {
         return resp.json();
       })
-      .then(function(resp) {
+      .then(function (resp) {
         var column = new Column(resp.id, name);
         board.addColumn(column);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
 });
-
+var targetColId;
 function initSortable(id) {
   var el = document.getElementById(id);
   var sortable = Sortable.create(el, {
     group: "kanban",
     sort: true,
     handle: ".handle",
-    animation: 150
+    animation: 150,
+    onAdd: function (evt) {
+      targetColId = evt.to.id;
+    }
   });
 }
