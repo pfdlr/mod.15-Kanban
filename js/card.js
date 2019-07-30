@@ -1,20 +1,20 @@
 // KLASA KANBAN CARD
 function Card(id, name) {
-  var self = this;
+ // var self = this;
 
   this.id = id;
   this.name = name || "No card name given";
   this.element = generateTemplate("card-template", { description: this.name }, "li");
 
-  this.element.querySelector(".card").addEventListener("click", function(event) {
+  this.element.querySelector(".card").addEventListener("click", (event) => {
     event.stopPropagation();
 
     if (event.target.classList.contains("btn-delete")) {
-      self.removeCard();
+      this.removeCard();
     }
   });
   //Rename card
-  this.element.querySelector(".card-description").addEventListener("keydown", function(event) {
+  this.element.querySelector(".card-description").addEventListener("keydown", (event) => {
     var esc = event.which == 27,
       nl = event.which == 13,
       el = event.target,
@@ -31,7 +31,7 @@ function Card(id, name) {
         document.execCommand("undo");
         el.blur();
       } else if (nl) {
-        self.modifyCard(data);
+        this.modifyCard(data);
         el.blur();
         event.preventDefault();
       }
@@ -40,36 +40,26 @@ function Card(id, name) {
   //Move card
   this.element.ondragend = function() {
     data = {
-      name: self.name,
+      name: this.name,
       bootcamp_kanban_column_id: targetColId
     };
-    self.modifyCard(data);
+    this.modifyCard(data);
   }
 }
 
 Card.prototype = {
   removeCard: function() {
-    var self = this;
+    //var self = this;
 
-    fetch(baseUrl + "/card/" + self.id, { method: "DELETE", headers: myHeaders })
-      .then(function(resp) {
-        return resp.json();
-      })
-      .then(function(resp) {
-        self.element.parentNode.removeChild(self.element);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    fetch(baseUrl + "/card/" + this.id, { method: "DELETE", headers: myHeaders })
+      .then((resp) => resp.json())
+      .then((resp) => this.element.parentNode.removeChild(this.element))
+      .catch((error) => console.log(error))
   },
   modifyCard: function(data) {
-    var self = this;
-    fetch(baseUrl + "/card/" + self.id, { method: "PUT", headers: myHeaders, body: JSON.stringify(data) })
-      .then(function(resp) {
-        return resp.json();
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    //var self = this;
+    fetch(baseUrl + "/card/" + this.id, { method: "PUT", headers: myHeaders, body: JSON.stringify(data) })
+      .then((resp) => resp.json())
+      .catch((error) => console.log(error));
   }
 };

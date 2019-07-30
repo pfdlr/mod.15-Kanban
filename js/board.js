@@ -7,7 +7,7 @@ var board = {
   element: document.querySelector("#board .column-container")
 };
 
-document.querySelector("#board .create-column").addEventListener("click", function () {
+document.querySelector("#board .create-column").addEventListener("click", () => {
   var name = prompt("Enter a column name");
   if (name === null) {
     return;
@@ -21,16 +21,12 @@ document.querySelector("#board .create-column").addEventListener("click", functi
       headers: myHeaders,
       body: JSON.stringify(data)
     })
-      .then(function (resp) {
-        return resp.json();
-      })
-      .then(function (resp) {
+      .then((resp) => resp.json())
+      .then((resp) => {
         var column = new Column(resp.id, name);
         board.addColumn(column);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch((error) => console.log(error))
   }
 });
 var targetColId;

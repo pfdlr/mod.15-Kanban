@@ -1,13 +1,13 @@
 function Column(id, name) {
-  var self = this;
+  //var self = this;
 
   this.id = id;
   this.name = name || "No column name given";
   this.element = generateTemplate("column-template", { name: this.name, id: this.id });
   // Remove column
-  this.element.querySelector(".column").addEventListener("click", function (event) {
+  this.element.querySelector(".column").addEventListener("click", (event) => {
     if (event.target.classList.contains("btn-delete")) {
-      self.removeColumn();
+      this.removeColumn();
     }
     // Add card
     if (event.target.classList.contains("add-card")) {
@@ -18,28 +18,24 @@ function Column(id, name) {
       } else {
         var data = {
           name: cardName,
-          bootcamp_kanban_column_id: self.id
+          bootcamp_kanban_column_id: this.id
         };
         fetch(baseUrl + "/card", {
           method: "POST",
           headers: myHeaders,
           body: JSON.stringify(data)
         })
-          .then(function (res) {
-            return res.json();
-          })
-          .then(function (resp) {
+          .then((res) => res.json())
+          .then((resp) => {
             var card = new Card(resp.id, cardName);
-            self.addCard(card);
+            this.addCard(card);
           })
-          .catch(function(error) {
-            console.log(error);
-          });
+          .catch((error) =>  console.log(error));
       }
     } //end of addCard
   });
   //Rename column
-  this.element.querySelector(".column-title").addEventListener("keydown", function (event) {
+  this.element.querySelector(".column-title").addEventListener("keydown", (event) => {
     var esc = event.which == 27,
       nl = event.which == 13,
       el = event.target,
@@ -54,7 +50,7 @@ function Column(id, name) {
         document.execCommand('undo');
         el.blur();
       } else if (nl) {
-        self.renameColumn(data);
+        this.renameColumn(data);
         el.blur();
         event.preventDefault();
       }
@@ -67,26 +63,16 @@ Column.prototype = {
     this.element.querySelector("ul").appendChild(card.element);
   },
   removeColumn: function () {
-    var self = this;
-    fetch(baseUrl + "/column/" + self.id, { method: "DELETE", headers: myHeaders })
-      .then(function (resp) {
-        return resp.json();
-      })
-      .then(function (resp) {
-        self.element.parentNode.removeChild(self.element);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    //var self = this;
+    fetch(baseUrl + "/column/" + this.id, { method: "DELETE", headers: myHeaders })
+      .then((resp) =>resp.json())
+      .then((resp) => this.element.parentNode.removeChild(this.element))
+      .catch((error) => console.log(error));
   },
   renameColumn: function (data) {
-    var self = this;
-    fetch(baseUrl + "/column/" + self.id, { method: "PUT", headers: myHeaders, body: JSON.stringify(data) })
-      .then(function (resp) {
-        return resp.json();
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    //var self = this;
+    fetch(baseUrl + "/column/" + this.id, { method: "PUT", headers: myHeaders, body: JSON.stringify(data) })
+      .then((resp) => resp.json())
+      .catch((error) => console.log(error))
   },
 };
